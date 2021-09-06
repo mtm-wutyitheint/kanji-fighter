@@ -1,0 +1,43 @@
+.pagination {
+  width: 60%;
+  display: flex;
+  margin: 40px auto;
+  padding: 0;
+  padding-bottom: 40px;
+  list-style: none;
+  outline: none;
+
+  .active {
+    a,
+    span,
+    a:hover,
+    span:hover,
+    a:focus,
+    span:focus {
+      background-color: #e91e63;
+      border-color: #e91e63;
+      outline: none;
+    }
+  }
+  .disabled {
+    pointer-events: none; //This makes it not clickable
+    opacity: 0.6;
+  }
+  li {
+    margin: 15px auto;
+    a {
+      border: 1px solid #eb9fa1;
+      margin: 0 2px;
+      padding: 5px 10px;
+      outline: none;
+      list-style: none;
+      cursor: pointer;
+    }
+    span {
+      color: #e91e63;
+    }
+  }
+  .list {
+    display: flex;
+  }
+}

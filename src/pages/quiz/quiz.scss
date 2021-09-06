@@ -1,0 +1,89 @@
+.quiz {
+  .main {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    .head {
+      text-align: center;
+    }
+    .form {
+      font-size: 19px;
+      font-family: system-ui;
+      padding: 10px 25px;
+      .form-label {
+        display: block;
+        margin: 2.3vh 0;
+        font-size: 22px;
+        font-family: sans-serif;
+        font-weight: bold;
+      }
+      .form-field {
+        margin: 1.5vw;
+      }
+      .input-range {
+        width: 30%;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 20px;
+        &:focus {
+          outline: none !important;
+        }
+      }
+      .error-message {
+        color: #ff0000;
+      }
+      .check-btn {
+        display: block;
+      }
+      .btn-submit {
+        display: block;
+        width: 130px;
+        padding: 20px;
+        border: 0;
+        border-radius: 22px;
+        background-color: #8dbcf4;
+        margin: 40px 0;
+      }
+      .select-chapter-box {
+        width: 30%;
+        border: 1px solid;
+        padding: 7px;
+        text-align: center;
+        border-radius: 20px;
+        .cross {
+          float: right;
+          cursor: pointer;
+        }
+      }
+    }
+    .complete-btn {
+      display: block;
+      width: 10vw;
+      padding: 15px;
+      border: 0;
+      border-radius: 22px;
+      background-color: #8dbcf4;
+      margin: 30px auto;
+    }
+  }
+
+  @media screen and (max-width: 699px) and (min-width: 300px) {
+    .main {
+      width: 100%;
+      margin: 0;
+      .form {
+        font-size: 20px;
+        .form-field {
+          display: block;
+          margin: 15px;
+        }
+        .input-range {
+          width: 60%;
+        }
+        .select-chapter-box {
+          width: 60%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+.exam-result {
+  display: block;
+  width: 100%;
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+
+    thead {
+      tr {
+        background-color: #ea736a;
+      }
+    }
+
+    td,
+    th {
+      border: 2px solid #ea736a;
+      text-align: left;
+      padding: 8px;
+      .chapter-select-box {
+        background-color: transparent;
+        border: 0;
+      }
+    }
+  }
+
+  .show-more-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    .show-more-btn {
+      font-size: 14px;
+      padding: 10px 20px;
+      margin: 14px auto;
+      border: 0;
+      background-color: #ea736a;
+      border-radius: 17px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) and (min-width: 768px) {
+    table {
+      td,
+      th {
+        .chapter-select-box {
+          width: 9vw;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) and (min-width: 300px) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr {
+      margin: 0 0 2rem 0;
+    }
+
+    td {
+      display: flex;
+      border: none !important;
+      border-bottom: 1px solid #ea736a !important;
+    }
+
+    td:before {
+      top: 0;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+
+    .exam-table {
+      td:nth-of-type(1):before {
+        content: "No";
+      }
+      td:nth-of-type(2):before {
+        content: "Score";
+      }
+      td:nth-of-type(3):before {
+        content: "Total";
+      }
+      td:nth-of-type(4):before {
+        content: "Answer Date";
+      }
+    }
+    .practise-table {
+      td:nth-of-type(1):before {
+        content: "No";
+      }
+      td:nth-of-type(2):before {
+        content: "Score";
+      }
+      td:nth-of-type(3):before {
+        content: "Total";
+      }
+      td:nth-of-type(4):before {
+        content: "Kind";
+      }
+      td:nth-of-type(5):before {
+        content: "Chapters";
+      }
+      td:nth-of-type(6):before {
+        content: "Random Words";
+      }
+      td:nth-of-type(7):before {
+        content: "Answer Date";
+      }
+    }
+  }
+}

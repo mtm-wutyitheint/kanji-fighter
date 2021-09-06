@@ -1,0 +1,21 @@
+.score-result-detail {
+  width: 90%;
+  margin: 0 auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    thead {
+      tr {
+        background-color: #ea736a;
+      }
+    }
+
+    td,
+    th {
+      text-align: left;
+      padding: 10px;
+    }
+  }
+}
