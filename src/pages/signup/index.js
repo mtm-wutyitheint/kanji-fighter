@@ -198,7 +198,12 @@ class Signup extends Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogContent>
+          <DialogContent
+            style={{ 
+              width: '300px',
+              height: '60px' 
+            }}
+          >
             <DialogContentText id="alert-dialog-description">
               {alertTitle}
             </DialogContentText>
