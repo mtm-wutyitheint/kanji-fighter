@@ -83,7 +83,7 @@ class Learn extends React.Component {
         <h2 className="chapter">Chapter {this.state.currentChapter}</h2>
         <div className="container clearFix">
           {this.state.pageOfItems.map((words) => {
-            const imgUrl = env.apiEndPoint + words.logoPicture?.formats.thumbnail.url;
+            const imgUrl = env.apiEndPoint + words.logoPicture?.formats?.thumbnail.url;
             return (
               <div
               style={{ 

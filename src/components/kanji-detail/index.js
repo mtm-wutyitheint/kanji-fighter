@@ -18,9 +18,7 @@ export default function KanjiDetail(props) {
   const [kanjiItem, setKanjiItem] = React.useState(null);
   const [currentIndex, setCurrentIndex] = React.useState(null);
   const { open, close, data, index } = props;
-  console.log(kanjiItem)
-  const imgUrl = env.apiEndPoint + kanjiItem?.logoPicture.formats.thumbnail.url;
-console.log(imgUrl)
+  const imgUrl = env.apiEndPoint + kanjiItem?.logoPicture?.formats.thumbnail.url;
   const setCurrent = () => {
     if (!isNil(currentIndex)) {
       setCurrentIndex(currentIndex);
