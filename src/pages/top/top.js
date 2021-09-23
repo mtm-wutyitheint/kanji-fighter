@@ -26,8 +26,8 @@ function Top() {
             }}>
               <button onClick={() => setLevel('N4')} className="level-btn no-link">N4</button>
             </Link>
-          </div>
-          <div className="level">
+          {/* </div>
+          <div className="level"> */}
             <Link className="no-link" to={{
               pathname: "/content",
               state: {

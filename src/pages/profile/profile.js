@@ -131,6 +131,7 @@ class Profile extends React.Component {
     });
   }
   fileImageChange(files) {
+    console.log(files)
     const reader = new FileReader();
     reader.onload = () => {
       this.setState({
@@ -148,6 +149,7 @@ class Profile extends React.Component {
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
     let jwt = loginUser && loginUser.jwt ? loginUser.jwt : "";
     const headers = { Authorization: `Bearer ${jwt}` };
+    console.log(data)
     if (!this.state.isGuest) {
       axios
         .put(env.apiEndPoint + "/users/" + id, data, { headers })
@@ -166,7 +168,7 @@ class Profile extends React.Component {
     }
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     const user = _.cloneDeep(this.state);
     const userId = this.state.id;
@@ -174,11 +176,37 @@ class Profile extends React.Component {
     if (user.name) {
       data.username = user.name;
     }
+    console.log(user.profilePicture)
     if (user.profilePicture && user.profilePicture instanceof File) {
+      console.log('here')
       const body = new FormData();
       body.append("data", JSON.stringify(data));
       body.append("files.profile", user.profilePicture);
       JSON.stringify(body);
+      const param = new FormData();
+      param.append('files', user.profilePicture);
+      const imagedata = () => {
+        return new Promise((imgresolve) => {
+          axios
+          .post(env.apiEndPoint + "/upload" , param)
+          .then((data) => {imgresolve(data)})
+          .catch((err) => {
+            if (err.response) {
+              console.error("Error in setState : ", err.response);
+              const errorDict = err.response;
+              this.setState({
+                isError: true,
+                errorMessage: errorDict.statusText,
+                errorStatus: errorDict.status,
+              });
+            }
+          });
+        });
+      };
+      const imagedatas = await imagedata();
+      if(imagedatas && imagedatas.data) {
+        data.profile = imagedatas.data[0];
+      }
       this.updateProfile(data, userId);
     } else {
       this.updateProfile(data, userId);

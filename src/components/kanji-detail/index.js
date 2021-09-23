@@ -64,7 +64,7 @@ export default function KanjiDetail(props) {
 
   let pageCount = String(currentIndex + 1) + " of " + String(data.length);
   return (
-    <div>
+    <div style={{width:'600px'}}>
       {kanjiItem ?
         <Dialog
           open={open}
@@ -74,7 +74,7 @@ export default function KanjiDetail(props) {
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle id="alert-dialog-slide-title">{kanjiItem.kanji} [ {kanjiItem.kunRomaji} ]</DialogTitle>
+          <DialogTitle id="alert-dialog-slide-title">{kanjiItem.kanji} [ {kanjiItem.kunyomi !== "-" ? kanjiItem.kunyomi : kanjiItem.onyomi} ]</DialogTitle>
           <DialogContent>
             <div className="clearFix">
               <img className="kanji-example" src={ kanjiItem?.logoPicture ? imgUrl : kanjiPic} alt={kanjiItem.kunRomaji}></img>
@@ -85,12 +85,12 @@ export default function KanjiDetail(props) {
                 </ul>
                 <li>Onyomi</li>
                 <ul>
-                  <li>{kanjiItem.onyomi}</li>
+                  <li className="jpword">{kanjiItem.onyomi}</li>
                   <li>{kanjiItem.onRomaji}</li>
                 </ul>
                 <li>Kunyomi</li>
                 <ul>
-                  <li>{kanjiItem.kunyomi}</li>
+                  <li className="jpword">{kanjiItem.kunyomi}</li>
                   <li>{kanjiItem.kunRomaji}</li>
                 </ul>
                 {/* <li>Examples</li>
@@ -102,13 +102,14 @@ export default function KanjiDetail(props) {
               {/* <img className="kanji-example" src={kanjiPic} alt={kanjiItem.kunRomaji}></img> */}
 
             </div>
-            <p className="page-count">
-              <button onClick={handlePrevious}>Previous</button>
-              {pageCount}
-              <button onClick={handleNext}>Next</button>
-            </p>
+            
 
           </DialogContent>
+          <p className="page-count">
+              <button onClick={handlePrevious}>&#171;</button>
+              {pageCount}
+              <button onClick={handleNext}>&#187;</button>
+            </p>
           <DialogActions>
             <Button className="right-corner" onClick={() => dialogClose()} color="primary">
               close

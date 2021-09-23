@@ -67,7 +67,7 @@ class Login extends Component {
   };
   loginInAsGuest() {
     this.setState({ success: true });
-    localStorage.setItem("loginUser", JSON.stringify({ id: "guest" }));
+    sessionStorage.setItem("loginUser", JSON.stringify({ id: "guest" }));
   }
   render() {
     let alertTitle;

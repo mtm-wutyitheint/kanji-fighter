@@ -1,3 +1,8 @@
+@font-face{
+  font-family: "Noto Sans Japanese";
+  src:url('../../font/NotoSansJP-Regular.otf');
+}
+
 .clearFix:after {
   content: "";
   display: block;
@@ -6,9 +11,17 @@
   font-size: 0;
   visibility: hidden;
 }
+.MuiDialogContent-root {
+  width: 450px;
+  height: 320px;
+}
+.MuiDialogTitle-root {
+  margin: 15px 0 -20px 18px !important;
+}
 .MuiTypography-h6 {
-  font-size: 30px !important;
+  font-size: 28px !important;
   font-weight: bold !important;
+  font-family: "Noto Sans Japanese" !important;
 }
 .kanji-example {
   float: left;
@@ -16,16 +29,21 @@
   height: 200px;
 }
 .meaning-lst {
-  float: left;
-  width: 40%;
+  float: right;
+  width: 48%;
   font-size: 18px;
   margin-left: -20px;
+  .jpword{
+    font-family: "Noto Sans Japanese";
+    font-size: 16px;
+  }
 }
 li {
   margin: 10px;
 }
 .page-count {
   width: 100%;
+  margin: 8px 0 0 0;
   display: block;
   text-align: center;
   .arrow {
@@ -49,7 +67,10 @@ li {
     -webkit-transform: rotate(135deg);
   }
   button{
-    margin: 10px;
+    margin: 10px 15px;
+    padding: 0 10px;
+    font-size: 20px;
+    cursor: pointer;
   }
 }
 @media only screen and (max-width: 762px) {

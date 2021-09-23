@@ -8,10 +8,10 @@
     visibility: hidden;
   }
   .content-logo {
-    height: 400px;
+    height: 320px;
     .logo1 {
       float: left;
-      width: 64%;
+      width: 60%;
       .content-log1 {
         height: 200px;
         background-image: url("../../img/content2.png");
@@ -27,6 +27,7 @@
       float: right;
       width: 30%;
       height: 350px;
+      margin-right: 5%;
       background-image: url("../../img/content1.png");
       background-repeat: no-repeat;
       background-position: center;
@@ -38,15 +39,16 @@
     width: 100%;
     .main-section {
       display: flex;
-      width: 50%;
+      width: 100%;
+      justify-content: center;
       margin: 0 auto;
       .section {
-        width: 33%;
+        width: 15%;
         flex-direction: column;
         border: 0;
         font-weight: bold;
         .link {
-          display: block;
+          display: inline-block;
           margin: 0 auto;
           padding: 2.5vw;
           width: 27%;
@@ -54,7 +56,7 @@
           border-radius: 50%;
           background-color: #ea736a;
           text-align: center;
-          font-size: 18px;
+          font-size: 22px;
         }
       }
     }
@@ -113,7 +115,7 @@
     .content-logo {
       height: 180px;
       .logo1 {
-        width: 75%;
+        width: 70%;
         .content-log1 {
           margin: 0 10%;
         }
@@ -121,10 +123,12 @@
       .content-log2 {
         width: 25%;
         height: 220px;
+        margin-right: 0;
       }
     }
     .content-section {
       width: 100%;
+      margin-top: 40px;
       .main-section {
         display: block;
         width: 45%;
@@ -137,7 +141,7 @@
             width: 100%;
             border: 0;
             border-radius: 30px;
-            font-size: 16px;
+            font-size: 18px;
           }
         }
       }

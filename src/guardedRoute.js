@@ -12,11 +12,19 @@ const GuardedRoute = ({ component: Component, auth, ...rest }) => (
 
 const isAuth = () => {
   let loginUser = JSON.parse(localStorage.getItem('loginUser'));
+  let guestUser = JSON.parse(sessionStorage.getItem('loginUser'));
 
-  if (loginUser && loginUser.id === 'guest') {
+  if (guestUser) {
     return true;
   }
+  if (isNil(loginUser) || isNil(loginUser.jwt) || isNil(loginUser.user)) {
+    return false;
+  }
+  return true;
+}
 
+const isLocalUser = () => {
+  let loginUser = JSON.parse(localStorage.getItem('loginUser'));
   if (isNil(loginUser) || isNil(loginUser.jwt) || isNil(loginUser.user)) {
     return false;
   }

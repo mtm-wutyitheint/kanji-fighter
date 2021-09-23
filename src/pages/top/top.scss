@@ -9,7 +9,7 @@
   }
   .logo-img {
     float: left;
-    width: 60%;
+    width: 50%;
     .img {
       display: block;
       max-width: 420px;
@@ -24,25 +24,33 @@
   .top-text {
     float: right;
     width: 40%;
+    text-align: center;
+    margin-right: 10%;
     .choose-img {
       display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 70%;
+      // margin-left: auto;
+      // margin-right: auto;
+      width: 80%;
       padding-top: 70px;
+      display: inline-block;
     }
     .level {
-      margin: 40px 0;
+      margin: 20px 0;
+      padding: 0;
+      display: inline-block;
+      
+      // margin-left: 70px;
       .level-btn {
         display: block;
         width: 210px;
         padding: 15px 0;
-        margin: 0 auto;
+        margin-bottom: 20px;
         font-size: 30px;
         font-weight: bold;
         border: 0;
         border-radius: 11px;
         background-color: #ea736a;
+        cursor: pointer;
       }
       .no-link {
         text-decoration: none;
@@ -60,12 +68,13 @@
       }
     }
     .top-text {
+      text-align: center;
       .choose-img {
         width: 90%;
         padding-top: 100px;
       }
       .level {
-        margin: 15px 0;
+        margin: 15px 20px;
         .level-btn{
           width: 180px;
           padding: 10px 0;
@@ -89,9 +98,12 @@
       display: block;
       width: 100%;
       float: none;
+      text-align: center;
       .choose-img {
-        width: 80%;
+        width: 60%;
+        margin: 0 auto;
         padding-top: 0;
+        display: block;
       }
       .level {
         margin: 15px 0;

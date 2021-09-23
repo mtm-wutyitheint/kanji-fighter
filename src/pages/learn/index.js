@@ -1,12 +1,11 @@
 import React from 'react';
-import kanjiPic from '../../img/kanji.png';
+import LoadingPic from '../../img/loading.gif';
 import "./learn.scss";
 import KanjiDetail from '../../components/kanji-detail';
 import { withRouter } from 'react-router-dom';
 import Pagination from "../../components/pagination/pagination";
 import axios from 'axios';
 import { env } from '../../env/development';
-import { repeat } from 'lodash';
 
 const defaultProps = {
   data: [],
@@ -24,7 +23,8 @@ class Learn extends React.Component {
       data: [],
       pageOfItems: [],
       inputvalue: '',
-      currentChapter: 1
+      currentChapter: 1,
+      pending: false
     }
     defaultProps.level = localStorage.getItem('level')
     this.kind = defaultProps.level;
@@ -33,10 +33,11 @@ class Learn extends React.Component {
     this.search = this.search.bind(this)
   }
   componentDidMount() {
-    axios.get(env.apiEndPoint + '/kanjis', { params: { level: this.kind, _limit: -1 } })
+    axios.get(env.apiEndPoint + '/kanjis', { params: { level: this.kind, _limit: -1 , _sort: 'KanjiNum:ASC' } })
       .then((response) => {
         this.setState({ data: response.data })
         defaultProps.data = response.data;
+        this.setState({ pending: true })
       })
       .catch((error) => console.error(error));
   }
@@ -71,7 +72,7 @@ class Learn extends React.Component {
   render() {
     return (
       <div className="learn">
-        <h1 className="header">Learn {this.kind} kanji </h1>
+        <h1 className="header">Chapter {this.state.currentChapter} </h1>
         <div className="chapter-selection clearFix">
           <input
             className="find clearFix"
@@ -80,8 +81,13 @@ class Learn extends React.Component {
             onChange={this.search}
           ></input>
         </div>
-        <h2 className="chapter">Chapter {this.state.currentChapter}</h2>
+        {/* <h2 className="chapter">Chapter {this.state.currentChapter}</h2> */}
+        
         <div className="container clearFix">
+          { this.state.pending === false &&
+            <div className="loading"><img src={LoadingPic} alt=""></img></div>
+            
+          }
           {this.state.pageOfItems.map((words) => {
             const imgUrl = env.apiEndPoint + words.logoPicture?.formats?.thumbnail.url;
             return (
@@ -94,7 +100,9 @@ class Learn extends React.Component {
                 className="block clearFix">
                 <div className="mean">
                   <span className="kanji">{words.kanji}</span>
-                  ({words.kunRomaji}) = {words.meaning}</div>
+                  <span className="kunyomi">{words.kunyomi !== "-" ? words.kunyomi : words.onyomi} </span> =
+                  <span className="meaning"> {words.meaning} </span>
+                </div>
                 {/* <img className="logo" src={words.logoPicture ? imgUrl : kanjiPic} alt="kanji logo"></img> */}
               </div>
             )

@@ -23,6 +23,7 @@
       .input-range {
         width: 30%;
         border-radius: 10px;
+        margin: 0 0 0 20px;
         padding: 10px;
         font-size: 20px;
         &:focus {
@@ -31,6 +32,7 @@
       }
       .error-message {
         color: #ff0000;
+        margin-left: 30px;
       }
       .check-btn {
         display: block;
@@ -43,15 +45,19 @@
         border-radius: 22px;
         background-color: #8dbcf4;
         margin: 40px 0;
+        cursor: pointer;
       }
       .select-chapter-box {
-        width: 30%;
+        width: 27%;
         border: 1px solid;
-        padding: 7px;
+        margin-left: 30px;
+        padding: 5px;
         text-align: center;
         border-radius: 20px;
         .cross {
           float: right;
+          margin-right: 10px;
+          font-size: 80%;
           cursor: pointer;
         }
       }
