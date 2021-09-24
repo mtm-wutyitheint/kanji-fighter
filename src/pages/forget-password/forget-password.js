@@ -46,7 +46,7 @@ class ForgetPassword extends React.Component {
   }
   loginInAsGuest() {
     this.setState({ success: true });
-    localStorage.setItem('loginUser', JSON.stringify({ id: 'guest' }));
+    sessionStorage.setItem('loginUser', JSON.stringify({ id: 'guest' }));
   }
   handleClose() {
     this.setState({ open: false })

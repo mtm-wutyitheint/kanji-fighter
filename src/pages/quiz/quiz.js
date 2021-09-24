@@ -56,8 +56,8 @@ class Quiz extends React.Component {
 
   componentDidMount() {
     const level = localStorage.getItem("level");
-    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
-    if (loginUser.id === "guest") {
+    const loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
+    if (loginUser && loginUser.id === "guest") {
       this.setState({ isGuest: true });
     } else {
       this.setState({ isGuest: false });
