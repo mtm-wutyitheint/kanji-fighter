@@ -29,6 +29,7 @@ class Signup extends Component {
     this.singup = this.singup.bind(this);
     this.handleChangeForEmail = this.handleChangeForEmail.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    sessionStorage.clear();
   }
 
   singup(event) {
