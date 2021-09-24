@@ -418,7 +418,12 @@ class QuizComponent extends React.Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogContent>
+          <DialogContent
+           style={{ 
+             width: '300px',
+             height: '50px' 
+           }}
+          >
             <DialogContentText id="alert-dialog-description">
               {this.state.scoreText}
             </DialogContentText>
