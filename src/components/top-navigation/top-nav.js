@@ -11,12 +11,19 @@ import { isNil } from 'lodash';
 
 export default function TopNav() {
   const [auth, setAuth] = React.useState(true);
+  const [guest, setUser] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
 
   const currentLoginUser = () => {
     const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+    const guestUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if(guestUser) {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
     if (isNil(loginUser) || isNil(loginUser.jwt) || isNil(loginUser.user)) {
       setAuth(false);
     } else {
@@ -53,7 +60,7 @@ export default function TopNav() {
 
   return (
     <div className="root">
-      {auth && (
+      {(auth || guest) &&(
         <AppBar position="static">
           <Toolbar>
             <div className="nav-list title">
@@ -66,7 +73,7 @@ export default function TopNav() {
                 </div>
               </div>
               <a className="space-between" href="/comming-soon">Game</a>
-              {!auth &&
+              {guest &&
                 <a className="space-between" href="/signup">Sign up</a>
               }
             </div>
