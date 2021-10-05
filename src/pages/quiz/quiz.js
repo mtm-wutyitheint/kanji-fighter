@@ -8,6 +8,7 @@ import qs from "qs";
 import Select from "react-select";
 import TopScorers from "../../components/top-scorer/top-scores";
 import ErrorHandleDialog from "../../components/error-handle-dialog/error-handle-dialog";
+import LoadingPic from '../../img/loading.gif';
 
 const checkBoxItems = [
   { name: "Answer with meaning", value: "answerWithMeaning" },
@@ -46,6 +47,7 @@ class Quiz extends React.Component {
       isError: false,
       errorMessage: "",
       errorStatus: 0,
+      ispending: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeForCheck = this.handleChangeForCheck.bind(this);
@@ -55,6 +57,7 @@ class Quiz extends React.Component {
   }
 
   componentDidMount() {
+    
     const level = localStorage.getItem("level");
     const loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
     if (loginUser && loginUser.id === "guest") {
@@ -235,6 +238,7 @@ class Quiz extends React.Component {
 
   handeleSubmit() {
     const para = this.definePara();
+    this.setState({ ispending: true, showForm: false });
     axios
       .get(env.apiEndPoint + "/quiz", {
         params: para,
@@ -250,6 +254,7 @@ class Quiz extends React.Component {
           answerWithOnyomi: res.data.answer_with_onyomi,
           showForm: false,
           showQuiz: true,
+          ispending: false
         });
       })
       .catch((error) => {
@@ -463,9 +468,12 @@ class Quiz extends React.Component {
                 }
                 onClick={this.handeleSubmit}
               >
-                Let Start
+                Let's Start
               </button>
             </form>
+          )}
+          {this.state.ispending && (
+            <div className="loading"><img src={LoadingPic} alt=""></img></div>
           )}
           {this.state.showQuiz && (
             <QuizComponent

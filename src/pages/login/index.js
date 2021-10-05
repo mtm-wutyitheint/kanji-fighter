@@ -20,6 +20,7 @@ class Login extends Component {
       setOpen: false,
       pending: true,
       success: false,
+      notFound: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.singup = this.singup.bind(this);
@@ -35,8 +36,10 @@ class Login extends Component {
           password: this.state.password,
         })
         .then((response) => {
+          console.log(response.status)
           if (response.status === 200) {
             this.setState({ success: true, pending: false });
+            console.log(response.data)
             localStorage.setItem("loginUser", JSON.stringify(response.data));
           } else {
             this.setState({ success: false, pending: false });
@@ -70,13 +73,14 @@ class Login extends Component {
     sessionStorage.setItem("loginUser", JSON.stringify({ id: "guest" }));
   }
   render() {
+    console.log (this.state.notFound)
     let alertTitle;
     if (this.state.pending) {
       alertTitle = "Please wait! Login is Processing...";
     } else if (this.state.success) {
       alertTitle = "Login Sucess!";
-    } else {
-      alertTitle = "Login Failed! Please Try again...";
+    }  else {
+      alertTitle = "User not found!";
     }
     let route = this.state.success ? "/top" : "/login";
     return (
@@ -93,7 +97,7 @@ class Login extends Component {
             <input
               className="input"
               name="name"
-              value={this.state.name}
+              value={this.state.name.trim()}
               placeholder="Name or Email"
               onChange={this.handleChange}
             ></input>
@@ -103,7 +107,7 @@ class Login extends Component {
               className="input"
               type="password"
               name="password"
-              value={this.state.password}
+              value={this.state.password.trim()}
               placeholder="Password"
               onChange={this.handleChange}
             ></input>
@@ -132,19 +136,32 @@ class Login extends Component {
           open={this.state.open}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+          style={{ color: "red" }}
         >
           <DialogContent
-            style={{ 
-              width: '300px',
-              height: '50px' 
+            style={{
+              width: "230px",
+              height: "35px",
+              color: "black",
+              padding: "15px 10px -5px 10px",
             }}
           >
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText
+              style={{
+                color: "black",
+                fontSize: "14px",
+              }}
+              id="alert-dialog-description"
+            >
               {alertTitle}
             </DialogContentText>
           </DialogContent>
           {!this.state.pending && (
-            <DialogActions>
+            <DialogActions
+              style={{
+                padding: "0",
+              }}
+            >
               <Link className="no-link" to={route}>
                 <Button onClick={this.handleClose} color="primary" autoFocus>
                   OK

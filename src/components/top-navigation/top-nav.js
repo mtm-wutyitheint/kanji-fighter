@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -8,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import './top-nav.scss';
 import { isNil } from 'lodash';
+import { env } from "../../env/development";
+import { Button } from '@material-ui/core';
 
 export default function TopNav() {
   const [auth, setAuth] = React.useState(true);
@@ -15,6 +16,7 @@ export default function TopNav() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory();
+  const loginUser = JSON.parse(localStorage.getItem('loginUser'));
 
   const currentLoginUser = () => {
     const loginUser = JSON.parse(localStorage.getItem('loginUser'));
@@ -31,7 +33,9 @@ export default function TopNav() {
     }
   }
 
-  React.useEffect(() => {
+ 
+
+  useEffect(() => {
     currentLoginUser();
   })
 
@@ -80,15 +84,24 @@ export default function TopNav() {
             <div>
               {auth &&
                 <>
-                  <IconButton
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleMenu}
-                    color="inherit"
+                  <Button
+                    className="righ-btn"
+                    onClick={handleMenu}                 
                   >
-                    <AccountCircle />
-                  </IconButton>
+                    {
+                      loginUser && loginUser.user && loginUser.user.profile && loginUser.user.profile.url ?
+                      <div className="profile-image">
+                        <div
+                          className="image"
+                          style={{
+                            backgroundImage: `url(${env.apiEndPoint + loginUser?.user?.profile?.url})`,
+                          }}
+                        ></div>
+                      </div>
+                      :
+                      <AccountCircle />
+                    }
+                  </Button>
                   <Menu
                     id="menu-appbar"
                     anchorEl={anchorEl}
@@ -106,7 +119,6 @@ export default function TopNav() {
                   >
                     <MenuItem onClick={handleProfile}>Profile</MenuItem>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
-
                   </Menu>
                 </>
               }

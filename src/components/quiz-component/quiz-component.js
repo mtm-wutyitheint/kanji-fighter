@@ -28,6 +28,7 @@ class QuizComponent extends React.Component {
       isError: false,
       errorMessage: "",
       errorStatus: 0,
+      showbtn: false
     };
     this.allComplete = this.allComplete.bind(this);
     this.backToQuiz = this.backToQuiz.bind(this);
@@ -37,6 +38,21 @@ class QuizComponent extends React.Component {
 
   componentDidMount() {
     this.setDataToAllQiz();
+    this.btnShow();
+  }
+
+  btnShow() {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        this.setState({ showbtn: true });
+      } else {
+        this.setState({ showbtn: false });
+      }
+    });
+  }
+
+  scrollToTop = () => {
+    window.scrollTo(0, 0);
   }
 
   setDataToAllQiz() {
@@ -388,6 +404,11 @@ class QuizComponent extends React.Component {
                       })}
                     </div>
                   )}
+                  {
+                    this.state.showbtn && (
+                      <button onClick={this.scrollToTop} className="top-btn"> &#8679;</button>
+                    )
+                  }
                 </div>
               )}
             </div>

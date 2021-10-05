@@ -23,12 +23,4 @@ const isAuth = () => {
   return true;
 }
 
-const isLocalUser = () => {
-  let loginUser = JSON.parse(localStorage.getItem('loginUser'));
-  if (isNil(loginUser) || isNil(loginUser.jwt) || isNil(loginUser.user)) {
-    return false;
-  }
-  return true;
-}
-
 export default GuardedRoute;

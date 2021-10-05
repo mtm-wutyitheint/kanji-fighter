@@ -33,7 +33,7 @@ class Learn extends React.Component {
     this.search = this.search.bind(this)
   }
   componentDidMount() {
-    axios.get(env.apiEndPoint + '/kanjis', { params: { level: this.kind, _limit: -1 , _sort: 'KanjiNum:ASC' } })
+    axios.get(env.apiEndPoint + '/kanjis', { params: { level: this.kind, _limit: -1 , _sort: 'KanjiNum:ASC' }})
       .then((response) => {
         this.setState({ data: response.data })
         defaultProps.data = response.data;
@@ -89,7 +89,8 @@ class Learn extends React.Component {
             
           }
           {this.state.pageOfItems.map((words) => {
-            const imgUrl = env.apiEndPoint + words.logoPicture?.formats?.thumbnail.url;
+            console.log(words)
+            const imgUrl = 'env.apiEndPoint + words.logoPicture?.formats?.thumbnail.url';
             return (
               <div
               style={{ 
@@ -107,6 +108,9 @@ class Learn extends React.Component {
               </div>
             )
           })}
+          {this.state.pending === true && this.state.pageOfItems.length === 0 && (
+            <div className="no-result">There is no search result</div>
+          )}
         </div>
         <div>
           {this.state.data.length > 0 &&

@@ -35,9 +35,11 @@ class Signup extends Component {
   singup(event) {
     this.setState({ open: true, pending: true });
     event.preventDefault();
+    let name = this.state.name;
+    var cleanName = name.trim();
     axios
       .post(env.apiEndPoint + "/auth/local/register", {
-        username: this.state.name,
+        username: cleanName,
         email: this.state.email,
         password: this.state.password,
         confirmed: true,
@@ -119,7 +121,7 @@ class Signup extends Component {
     } else if (this.state.success) {
       alertTitle = "Sign up Success! Please Login again...";
     } else {
-      alertTitle = "Registration Failed! Please check your Information again...";
+      alertTitle = "Email already exists! Please check your information agian...";
     }
     let route = this.state.success ? "login" : "signup";
     return (
@@ -136,7 +138,7 @@ class Signup extends Component {
             <input
               className="input"
               name="name"
-              value={this.state.name}
+              value={this.state.name.trim()}
               placeholder="Name"
               onChange={this.handleChangeUser}
             ></input>
@@ -151,7 +153,7 @@ class Signup extends Component {
               className="input"
               type="email"
               name="email"
-              value={this.state.email}
+              value={this.state.email.trim()}
               placeholder="Email"
               onChange={this.handleChangeForEmail}
             ></input>
@@ -194,33 +196,41 @@ class Signup extends Component {
         </form>
         <Dialog
           open={this.state.open}
-          onClose={this.handleClose}
-          className="dialog"
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+          style={{ color: "red" }}
         >
           <DialogContent
-            style={{ 
-              width: '300px',
-              height: '60px' 
+            style={{
+              width: "300px",
+              height: "60px",
+              color: "black",
+              padding: "15px 10px -5px 10px",
             }}
           >
-            <DialogContentText id="alert-dialog-description">
+            <DialogContentText
+              style={{
+                color: "black",
+                fontSize: "14px",
+              }}
+              id="alert-dialog-description"
+            >
               {alertTitle}
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Link className="no-link" to={route}>
-              <Button
-                className="no-link"
-                onClick={this.handleClose}
-                color="primary"
-                autoFocus
-              >
-                OK
-              </Button>
-            </Link>
-          </DialogActions>
+          {!this.state.pending && (
+            <DialogActions
+              style={{
+                padding: "0",
+              }}
+            >
+              <Link className="no-link" to={route}>
+                <Button onClick={this.handleClose} color="primary" autoFocus>
+                  OK
+                </Button>
+              </Link>
+            </DialogActions>
+          )}
         </Dialog>
       </div>
     );

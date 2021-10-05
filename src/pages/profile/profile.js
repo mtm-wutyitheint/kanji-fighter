@@ -6,6 +6,11 @@ import { env } from "../../env/development";
 import _ from "lodash";
 import playerProfile from "../../img/profile_picture.png";
 import ErrorHandleDialog from "../../components/error-handle-dialog/error-handle-dialog";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import Button from "@material-ui/core/Button";
 
 class Profile extends React.Component {
   constructor() {
@@ -28,6 +33,10 @@ class Profile extends React.Component {
       isError: false,
       errorMessage: "",
       errorStatus: 0,
+      open: false,
+      pending: false,
+      success: false, 
+      change: false
     };
     this.fileChooser = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -129,6 +138,11 @@ class Profile extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    if(this.state.name !== event.target.value){
+      this.setState({ change: true});
+    } else {
+      this.setState({ change: false });
+    }
   }
   fileImageChange(files) {
     console.log(files)
@@ -142,10 +156,13 @@ class Profile extends React.Component {
     reader.onerror = () => {
       console.error(reader.error);
     };
+    console.log(files)
     reader.readAsDataURL(files[0]);
+    this.setState({ change: true})
   }
 
   updateProfile(data, id) {
+    this.setState({ open: true , pending: true});
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
     let jwt = loginUser && loginUser.jwt ? loginUser.jwt : "";
     const headers = { Authorization: `Bearer ${jwt}` };
@@ -153,7 +170,11 @@ class Profile extends React.Component {
     if (!this.state.isGuest) {
       axios
         .put(env.apiEndPoint + "/users/" + id, data, { headers })
-        .then(() => {})
+        .then((data) => {
+          console.log(data)
+          //  localStorage.setItem('loginUser', data)
+          this.setState({ success: true , pending: false, change: false});
+        })
         .catch((err) => {
           if (err.response) {
             console.error("Error in setState : ", err.response);
@@ -207,9 +228,10 @@ class Profile extends React.Component {
       if(imagedatas && imagedatas.data) {
         data.profile = imagedatas.data[0];
       }
-      this.updateProfile(data, userId);
+      this.updateProfile(data, userId)
+      
     } else {
-      this.updateProfile(data, userId);
+      this.updateProfile(data, userId)
     }
   }
 
@@ -221,7 +243,19 @@ class Profile extends React.Component {
     });
   }
 
+  handleClose = () => {
+    this.setState({ open: false , pending: false});
+  };
+
   render() {
+    let alertTitle;
+    if (this.state.pending) {
+      alertTitle = "Profile updating...";
+    } else if (this.state.success) {
+      alertTitle = "Update Sucess!";
+    } else {
+      alertTitle = "Update Failed! Please Try again...";
+    }
     return (
       <>
         {!this.state.isGuest ? (
@@ -285,13 +319,49 @@ class Profile extends React.Component {
                     disabled
                   ></input>
                   <div className="form-btn">
-                    <button type="submit" className="btn-save">
+                    <button type="submit" disabled={!this.state.change} className="btn-save">
                       save
                     </button>
                   </div>
                 </form>
               </div>
             </div>
+            <Dialog
+              open={this.state.open}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              style={{ color: "red" }}
+            >
+              <DialogContent
+                style={{
+                  width: "230px",
+                  height: "35px",
+                  color: "black",
+                  padding: "15px 10px -5px 10px",
+                }}
+              >
+                <DialogContentText
+                  style={{
+                    color: "black",
+                    fontSize: "14px",
+                  }}
+                  id="alert-dialog-description"
+                >
+                  {alertTitle}
+                </DialogContentText>
+              </DialogContent>
+              {!this.state.pending && (
+                <DialogActions
+                  style={{
+                    padding: "0",
+                  }}
+                >
+                <Button onClick={this.handleClose} color="primary" autoFocus>
+                  OK
+                </Button>
+                </DialogActions>
+              )}
+            </Dialog>
             <div className="record">
               <div className="record-container">
                 {this.state.examRecordN5.length > 0 && (

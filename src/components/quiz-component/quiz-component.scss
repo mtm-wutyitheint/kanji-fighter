@@ -51,6 +51,20 @@
         }
       }
     }
+    .top-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 30px;
+      // z-index: 99;
+      font-size: 30px;
+      border: none;
+      outline: none;
+      background-color: #e6635a;
+      color: white;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 4px;
+    }
     .complete-btn {
       display: block;
       width: 10vw;

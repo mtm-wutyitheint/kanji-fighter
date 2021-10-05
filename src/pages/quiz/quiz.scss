@@ -72,6 +72,13 @@
       margin: 30px auto;
     }
   }
+  .loading{
+    text-align: center;
+    margin-top: 60px;
+    img{
+      width: 10%;
+    }
+  }
 
   @media screen and (max-width: 699px) and (min-width: 300px) {
     .main {
