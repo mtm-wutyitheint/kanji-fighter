@@ -29,10 +29,12 @@ class Login extends Component {
   singup(event) {
     this.setState({ open: true, pending: true });
     event.preventDefault();
+    let name = this.state.name;
+    let trimName = name.trim();
     try {
       axios
         .post(env.apiEndPoint + "/auth/local", {
-          identifier: this.state.name,
+          identifier: trimName,
           password: this.state.password,
         })
         .then((response) => {
@@ -97,7 +99,7 @@ class Login extends Component {
             <input
               className="input"
               name="name"
-              value={this.state.name.trim()}
+              value={this.state.name}
               placeholder="Name or Email"
               onChange={this.handleChange}
             ></input>
@@ -115,7 +117,7 @@ class Login extends Component {
           <button
             className="text-center"
             disabled={
-              this.state.name.length === 0 || this.state.password.length === 0
+              this.state.name.trim().length === 0 || this.state.password.trim().length === 0
             }
           >
             Login

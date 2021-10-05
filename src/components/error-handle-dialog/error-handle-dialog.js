@@ -39,18 +39,45 @@ function ErrorHandleDialog(props) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogContent>
-        <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
-        <DialogContentText id="alert-dialog-description">
+      <DialogContent
+        style={{
+          width: "300px",
+          height: "200px",
+          color: "black",
+          // padding: "15px 10px -5px 10px",
+        }}
+      >
+        <DialogTitle 
+        style={{
+          margin: '0',
+          padding: '16px 0'
+        }}
+        id="alert-dialog-title">{"Error"}</DialogTitle>
+        <DialogContentText
+          style={{
+            color: "black",
+            fontSize: "14px",
+          }}
+         id="alert-dialog-description">
           <span>Status :</span>
           {props.status}
         </DialogContentText>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText
+          style={{
+            color: "black",
+            fontSize: "14px",
+          }}
+          id="alert-dialog-description">
           <span>Message :</span>
           {props.message}
         </DialogContentText>
         {detailMessage && (
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText
+            style={{
+              color: "black",
+              fontSize: "14px",
+            }}
+            id="alert-dialog-description">
             {detailMessage}
           </DialogContentText>
         )}

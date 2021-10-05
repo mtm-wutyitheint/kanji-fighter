@@ -36,10 +36,10 @@ class Signup extends Component {
     this.setState({ open: true, pending: true });
     event.preventDefault();
     let name = this.state.name;
-    var cleanName = name.trim();
+    let trimName = name.trim();
     axios
       .post(env.apiEndPoint + "/auth/local/register", {
-        username: cleanName,
+        username: trimName,
         email: this.state.email,
         password: this.state.password,
         confirmed: true,
@@ -90,7 +90,7 @@ class Signup extends Component {
   }
 
   handleChangeUser(event) {
-    if (event.target.value.length >= 4 && this.state.name.length > 0) {
+    if (event.target.value.trim().length >= 4 && this.state.name.trim().length > 0) {
       this.setState({ isNameValid: true });
     } else {
       this.setState({ isNameValid: false });
@@ -138,7 +138,7 @@ class Signup extends Component {
             <input
               className="input"
               name="name"
-              value={this.state.name.trim()}
+              value={this.state.name}
               placeholder="Name"
               onChange={this.handleChangeUser}
             ></input>
@@ -166,7 +166,7 @@ class Signup extends Component {
               className="input"
               type="password"
               name="password"
-              value={this.state.password}
+              value={this.state.password.trim()}
               placeholder="Password"
               onChange={this.handleChangePassword}
             ></input>
@@ -180,8 +180,8 @@ class Signup extends Component {
             type="submit"
             className="text-center"
             disabled={
-              this.state.name.length === 0 ||
-              this.state.password.length === 0 ||
+              this.state.name.trim().length === 0 ||
+              this.state.password.trim().length === 0 ||
               this.state.email.length === 0 ||
               !this.state.isNameValid ||
               !this.state.isEmailValid ||

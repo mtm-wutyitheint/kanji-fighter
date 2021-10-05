@@ -74,7 +74,12 @@ export default function KanjiDetail(props) {
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle id="alert-dialog-slide-title">{kanjiItem.kanji} [ {kanjiItem.kunyomi !== "-" ? kanjiItem.kunyomi : kanjiItem.onyomi} ]</DialogTitle>
+          <DialogTitle 
+          style={{
+            margin: '15px 0 -20px 18px',
+            padding: '16px 14px'
+          }}
+          id="alert-dialog-slide-title">{kanjiItem.kanji} [ {kanjiItem.kunyomi !== "-" ? kanjiItem.kunyomi : kanjiItem.onyomi} ]</DialogTitle>
           <DialogContent>
             <div className="clearFix">
               <img className="kanji-example" src={ kanjiItem?.logoPicture ? imgUrl : kanjiPic} alt={kanjiItem.kunRomaji}></img>
