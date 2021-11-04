@@ -89,7 +89,6 @@ class Learn extends React.Component {
             
           }
           {this.state.pageOfItems.map((words) => {
-            console.log(words)
             const imgUrl = 'env.apiEndPoint + words.logoPicture?.formats?.thumbnail.url';
             return (
               <div
