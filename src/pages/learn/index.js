@@ -89,7 +89,7 @@ class Learn extends React.Component {
             
           }
           {this.state.pageOfItems.map((words) => {
-            const imgUrl = 'env.apiEndPoint + words.logoPicture?.formats?.thumbnail.url';
+            const imgUrl = env.apiEndPoint + words?.logoPicture?.formats.thumbnail.url;
             return (
               <div
               style={{ 
@@ -103,7 +103,7 @@ class Learn extends React.Component {
                   <span className="kunyomi">{words.kunyomi !== "-" ? words.kunyomi : words.onyomi} </span> =
                   <span className="meaning"> {words.meaning} </span>
                 </div>
-                {/* <img className="logo" src={words.logoPicture ? imgUrl : kanjiPic} alt="kanji logo"></img> */}
+                {/* <img className="logo" src={imgUrl} alt="kanji logo"></img> */}
               </div>
             )
           })}
