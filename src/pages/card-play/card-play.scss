@@ -1,0 +1,124 @@
+body {
+  background-color: lightgreen;
+}
+
+.bold {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.MemoryCardBlock {
+  position: absolute;
+  // width:100%;
+  // height: 100%;
+  width: calc(100% - 41px);
+  padding: 20px;
+
+  header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+
+    > div {
+      font-size: 15px;
+      width: 500px;
+      text-align: center;
+      margin: 0 auto;
+    }
+  }
+
+  footer {
+    width: 360px;
+    position: relative;
+    margin: 0 auto;
+    padding: 10px 4px;
+    margin-top: 10px;
+
+    .score {
+      justify-content: center;
+      display: flex;
+
+      div {
+        padding: 8px;
+      }
+    }
+
+    .restart {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .kanjiBlock,
+  .hiraBlock {
+    display: inline-block;
+    width: 48%;
+    //margin-right: 30px;
+    h3 {
+      margin: 10px 50px;
+    }
+  }
+
+  .kanjiBlock {
+    margin-right: 30px;
+  }
+
+  .container {
+    border: 1px solid #dedede;
+    padding: 12px;
+    box-shadow: 0 0 4px 4px #dedede;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: stretch;
+    gap: 1rem;
+    margin: 0 auto;
+    // width: 360px;
+    height: 250px;
+    perspective: 100%;
+    max-width: 500px;
+  }
+  .chatCon {
+    width: 30%;
+    position: absolute;
+    bottom: 2%;
+    right: 5%;
+  }
+
+  .chatCon .chat-box {
+    /* display: none; */
+    width: 100%;
+    height: 500px;
+    border-radius: 25px;
+    background-color: #eee;
+  }
+  .chatCon .chat-box .footer {
+    float: right;
+    // margin-right: 30px;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .chatCon .pop {
+    width: 50%;
+    height: 15%;
+    float: right;
+    cursor: pointer;
+  }
+
+  .chatCon .pop p {
+    text-align: right;
+  }
+
+  .chatCon .pop img {
+    border-radius: 50%;
+    width: 25%;
+  }
+}
