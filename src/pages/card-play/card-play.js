@@ -58,7 +58,7 @@ export default function CardPlay() {
     let jwt = loginUser && loginUser.jwt ? loginUser.jwt : "";
     const headers = { Authorization: `Bearer ${jwt}` };
     axios
-      .get(`${env.apiEndPoint}/memory-games`)
+      .get(`${env.apiEndPoint}/lone-twals`)
       .then((res) => {
         console.log(res.data);
         const sliceArray = res.data.slice(0, 24);

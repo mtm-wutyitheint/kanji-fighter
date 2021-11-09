@@ -25,7 +25,7 @@ class Review extends Component {
     console.log(steps);
     const { keyword } = steps;
     axios
-      .get(`${env.apiEndPoint}/memory-games`)
+      .get(`${env.apiEndPoint}/lone-twals`)
       .then((res) => {
         console.log(res.data);
         this.setState({ dummyN5data: res.data });

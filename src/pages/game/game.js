@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import mountainBehindImg from '../../img/back-img.png'
 import { Link } from 'react-router-dom';
 import "./game.scss"
 
 export default function Home() {
-    const [scrollValue, setScrollValue] = useState();
     useEffect(() => {
       let value = 0;
       console.log(value)
       localStorage.setItem('game', true);
-    }, [scrollValue]);
+    }, []);
 
    
     return (
