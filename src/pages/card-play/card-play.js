@@ -14,6 +14,9 @@ import MemoryCard from "../../components/memory-card/card";
 import "./card-play.scss";
 import { env } from "../../env/development";
 import ChatPlay from "../chat-play/chat-play";
+import chatIcon from "../../img/chat-icon.png";
+import homeIcon from "../../img/home-icon.png";
+import { Link } from "react-router-dom";
 
 function shuffleCards(array) {
   const length = array.length;
@@ -157,21 +160,24 @@ export default function CardPlay() {
   };
 
   let hide = {
-    display: "none",
+    opacity: "0.5",
   };
   let show = {
-    display: "block",
+    opacity: "1",
   };
-  let textRef = React.createRef();
-  // const {messages} = props
 
   const [chatopen, setChatopen] = useState(false);
   const toggle = (e) => {
     setChatopen(!chatopen);
   };
 
+  const bactToHome = () => {
+    localStorage.removeItem("game");
+  };
+
   return (
     <div className="MemoryCardBlock">
+      {/* <img src={bgImg} alt="" className="bg_behind" /> */}
       <header>
         <h3>フリップカードゲームをプレイする</h3>
         <div>結果的に同じ内容の2枚のカードを選択してそれらを消滅させます。</div>
@@ -179,7 +185,7 @@ export default function CardPlay() {
       <br />
       <div className="kanjiBlock">
         <h3>Kanji</h3>
-        <div className="container">
+        <div className="container" style={chatopen ? hide : show}>
           {memoryList.map((card, index) => {
             return (
               <MemoryCard
@@ -199,7 +205,7 @@ export default function CardPlay() {
 
       <div className="hiraBlock">
         <h3>Furigana</h3>
-        <div className="container ">
+        <div className="container " style={chatopen ? hide : show}>
           {hira.map((card, index) => {
             return (
               <MemoryCard
@@ -247,7 +253,14 @@ export default function CardPlay() {
           <DialogTitle id="alert-dialog-title">
             Congratulations!!! You completed the challenge
           </DialogTitle>
-          <DialogContent>
+          <DialogContent
+            style={{
+              width: "300px",
+              height: "60px",
+              color: "black",
+              padding: "15px 10px -5px 10px",
+            }}
+          >
             <DialogContentText id="alert-dialog-description">
               You completed the game in {moves} moves. Your best score is{" "}
               {bestScore} moves.
@@ -260,17 +273,19 @@ export default function CardPlay() {
           </DialogActions>
         </Dialog>
       </div>
+      <div class="home-box">
+        <Link to="/content">
+          <img src={homeIcon} onClick={bactToHome} alt="" />
+        </Link>
+
+        <p>Go to home</p>
+      </div>
       <div class="chatCon">
-        {/* <div class="chat-box" style={chatopen ? show : hide}></div> */}
-        <div class="footer">{chatopen && <ChatPlay></ChatPlay>}</div>
+        <div class="footer">{chatopen && <ChatPlay memoryList = {memoryList}></ChatPlay>}</div>
 
         <div class="pop">
           <p>
-            <img
-              onClick={toggle}
-              src="https://p7.hiclipart.com/preview/151/758/442/iphone-imessage-messages-logo-computer-icons-message.jpg"
-              alt=""
-            />
+            <img onClick={toggle} src={chatIcon} alt="" />
           </p>
         </div>
       </div>
@@ -278,39 +293,3 @@ export default function CardPlay() {
   );
 }
 
-//   let hide = {
-//     display: 'none',
-//   }
-//   let show = {
-//     display: 'block'
-//   }
-//   let textRef = React.createRef()
-//   // const {messages} = props
-
-//   const [chatopen, setChatopen] = useState(false)
-//   const toggle = e => {
-//     setChatopen(!chatopen)
-//   }
-
-//   const handleSend = e => {
-//     // const get = props.getMessage
-//     // get(textRef.current.value)
-//   }
-//   return (
-//     <>
-//     <Items></Items>
-//     <div class='chatCon'>
-//       {/* <div class="chat-box" style={chatopen ? show : hide}></div> */}
-//       <div class="footer">
-//       {chatopen &&
-//       <ChatPlay></ChatPlay>
-//       }
-//     </div>
-//   {/* </div> */}
-//     <div class="pop">
-//       <p><img onClick={toggle} src="https://p7.hiclipart.com/preview/151/758/442/iphone-imessage-messages-logo-computer-icons-message.jpg" alt="" /></p>
-//     </div>
-//     </div>
-//     </>
-//   );
-// }

@@ -9,21 +9,15 @@ export default function Home() {
       let value = 0;
       console.log(value)
       localStorage.setItem('game', true);
-      // window.addEventListener('scroll', () => {
-      //    value = window.scrollY;
-      //    setScrollValue(value);
-      //    console.log(scrollValue);
-      // })
     }, [scrollValue]);
 
+   
     return (
       <>
          <div className="images">
             <img src={mountainBehindImg} alt="" className="mountains_behind"/>
             <h2 className="text" >Words Fighter</h2>
-            {/* <Link to="/card-play" className="btn">Card Game</Link>
-            <Link to="/chat-play" className="btn">Chat Play</Link> */}
-            <Link to="/card-play" className="btn">PLAY NOW</Link>
+            <Link to="/card-play" onClick="" className="btn">PLAY NOW</Link>
          </div>
       </>
     )

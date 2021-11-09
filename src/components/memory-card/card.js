@@ -1,6 +1,6 @@
 import classnames from "classnames";
-import memory from "../../img/memoryGame.jpg";
-import hiragana from "../../img/hiragana.jpg";
+import memory from "../../img/14.png";
+import hiragana from "../../img/15.png";
 import "./card.scss";
 
 const MemoryCard = ({ onClick, card, type, index, isInactive, isFlipped, isDisabled }) => {

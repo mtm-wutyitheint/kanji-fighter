@@ -5,159 +5,71 @@ import { ThemeProvider } from "styled-components";
 import "./chat-play.scss";
 import { Component } from "react";
 import PropTypes from "prop-types";
-import { DataUsageSharp } from "@material-ui/icons";
+import { env } from "../../env/development";
+import axios from "axios";
 
 class Review extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       keyword: "",
       furigana: "",
       meaning: "",
+      dummyN5data: [],
     };
   }
 
-  dummyN5data = [
-    {
-      kanji: "会社",
-      furigana: "かいしゃ",
-    },
-    {
-      kanji: "会話",
-      furigana: "かいわ",
-    },
-    {
-      kanji: "食事",
-      furigana: "しょくじ",
-    },
-    {
-      kanji: "用事",
-      furigana: "ようじ",
-    },
-    {
-      kanji: "発見",
-      furigana: "はっけん",
-    },
-    {
-      kanji: "開発",
-      furigana: "かいはつ",
-    },
-    {
-      kanji: "発音 ",
-      furigana: "はつおん",
-    },
-    {
-      kanji: "新聞",
-      furigana: "しんぶん",
-    },
-    {
-      kanji: "私立",
-      furigana: "しりつ",
-    },
-    {
-      kanji: "開始",
-      furigana: "かいし",
-    },
-    {
-      kanji: "歌手",
-      furigana: "かしゅ",
-    },
-    {
-      kanji: "通院",
-      furigana: "つういん",
-    },
-    {
-      kanji: "全体",
-      furigana: "ぜんたい",
-    },
-    {
-      kanji: "作家",
-      furigana: "さっか",
-    },
-    {
-      kanji: "制作",
-      furigana: "せいさく",
-    },
-    {
-      kanji: "作者",
-      furigana: "さくしゃ",
-    },
-    {
-      kanji: "工作",
-      furigana: "こうさく",
-    },
-    {
-      kanji: "動作",
-      furigana: "どうさ",
-    },
-    {
-      kanji: "主人",
-      furigana: "しゅじん",
-    },
-    {
-      kanji: "主要",
-      furigana: "しゅよう",
-    },
-    {
-      kanji: "地主",
-      furigana: "じぬし",
-    },
-    {
-      kanji: "公園",
-      furigana: "こうえん",
-    },
-    {
-      kanji: "公正",
-      furigana: "こうせい",
-    },
-    {
-      kanji: "以上",
-      furigana: "いじょう",
-    },
-    {
-      kanji: "以下",
-      furigana: "いか",
-    },
-  ];
-
-  componentWillMount() {
+  componentDidMount() {
+    console.log(this.props);
     const { steps } = this.props;
-    console.log(steps)
+    console.log(steps);
     const { keyword } = steps;
-    this.dummyN5data.forEach((datas) => {
-      if (datas.kanji === keyword.value) {
-        this.setState({
-          keyword: datas.kanji,
-          furigana: datas.furigana,
-          meaning: "",
+    axios
+      .get(`${env.apiEndPoint}/memory-games`)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ dummyN5data: res.data });
+        res.data.forEach((datas) => {
+          if (datas.kanji === keyword.value) {
+            this.setState({
+              keyword: datas.kanji,
+              furigana: datas.furigana,
+              meaning: "",
+            });
+          }
         });
-      }
-    });
+      })
+      .catch((err) => console.error(err));
   }
 
   render() {
     const { keyword, furigana, meaning } = this.state;
-    console.log(keyword, furigana, meaning);
+    console.log(keyword, furigana);
     return (
       <div style={{ width: "100%" }}>
-        {/* <h3>Summary</h3> */}
-        <table>
-          <tbody>
-            <tr>
-              <td>Keyword : </td>
-              <td>{keyword}</td>
-            </tr>
-            <tr>
-              <td>Furigana : </td>
-              <td>{furigana}</td>
-            </tr>
-            <tr>
-              <td>Meaning : </td>
-              <td>{meaning}</td>
-            </tr>
-          </tbody>
-        </table>
+        {this.state.dummyN5data.length > 0 && keyword && (
+          <table>
+            <tbody>
+              <tr>
+                <td>Keyword : </td>
+                <td>{keyword}</td>
+              </tr>
+              <tr>
+                <td>Furigana : </td>
+                <td>{furigana}</td>
+              </tr>
+              <tr>
+                <td>Meaning : </td>
+                <td>{meaning}</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+        {this.state.dummyN5data.length > 0 && !keyword && (
+          <p style={{ padding: "0", margin: "0" }}>
+            I am sorry. I can't find this keyword
+          </p>
+        )}
       </div>
     );
   }
@@ -165,20 +77,22 @@ class Review extends Component {
 
 Review.propTypes = {
   steps: PropTypes.object,
+  scrollValue: PropTypes.array,
 };
 
 Review.defaultProps = {
   steps: undefined,
+  scrollValue: undefined,
 };
 
 export default function ChatPlay() {
   const theme = {
     background: "#f5f8fb",
     fontFamily: "Helvetica Neue",
-    headerBgColor: "#EF6C00",
+    headerBgColor: "#EF2F7F",
     headerFontColor: "#fff",
     headerFontSize: "15px",
-    botBubbleColor: "#EF6C00",
+    botBubbleColor: "#EF2F7F",
     botFontColor: "#fff",
     userBubbleColor: "#fff",
     userFontColor: "#4a4a4a",
@@ -193,10 +107,10 @@ export default function ChatPlay() {
     {
       id: "name",
       user: true,
-      trigger: "3",
+      trigger: "2",
     },
     {
-      id: "3",
+      id: "2",
       message: "Is there anything to ask?",
       trigger: "gender",
     },
@@ -215,7 +129,7 @@ export default function ChatPlay() {
     {
       id: "keyword",
       user: true,
-      trigger: "7",
+      trigger: "3",
     },
     {
       id: "say-no",
@@ -224,92 +138,26 @@ export default function ChatPlay() {
     },
 
     {
-      id: "7",
+      id: "3",
       component: <Review />,
       asMessage: true,
+      trigger: "update",
     },
-    // {
-    //   id: "review",
-    //   component: <Review />,
-    //   asMessage: true,
-    //   trigger: "update"
-    // },
-
-    // {
-    //   id: "5",
-    //   message: "How old are you?",
-    //   trigger: "age"
-    // },
-    // {
-    //   id: "age",
-    //   user: true,
-    //   trigger: "7",
-    //   validator: value => {
-    //     if (isNaN(value)) {
-    //       return "value must be a number";
-    //     } else if (value < 0) {
-    //       return "value must be positive";
-    //     } else if (value > 120) {
-    //       return `${value}? Come on!`;
-    //     }
-
-    //     return true;
-    //   }
-    // },
-    // {
-    //   id: "7",
-    //   message: "Great! Check out your summary",
-    //   trigger: "review"
-    // },
-    // {
-    //   id: "review",
-    //   component: <Review />,
-    //   asMessage: true,
-    //   trigger: "update"
-    // },
-    // {
-    //   id: "update",
-    //   message: "Would you like to update some field?",
-    //   trigger: "update-question"
-    // },
-    // {
-    //   id: "update-question",
-    //   options: [
-    //     { value: "yes", label: "Yes", trigger: "update-yes" },
-    //     { value: "no", label: "No", trigger: "end-message" }
-    //   ]
-    // },
-    // {
-    //   id: "update-yes",
-    //   message: "What field would you like to update?",
-    //   trigger: "update-fields"
-    // },
-    // {
-    //   id: "update-fields",
-    //   options: [
-    //     { value: "name", label: "Name", trigger: "update-name" },
-    //     { value: "gender", label: "Gender", trigger: "update-gender" },
-    //     { value: "age", label: "Age", trigger: "update-age" }
-    //   ]
-    // },
-    // {
-    //   id: "update-name",
-    //   update: "name",
-    //   trigger: "7"
-    // },
-    // {
-    //   id: "update-gender",
-    //   update: "gender",
-    //   trigger: "7"
-    // },
-    // {
-    //   id: "update-age",
-    //   update: "age",
-    //   trigger: "7"
-    // },
+    {
+      id: "update",
+      message: "Would you like to ask some more?",
+      trigger: "update-question",
+    },
+    {
+      id: "update-question",
+      options: [
+        { value: "yes", label: "Yes", trigger: "say-yes" },
+        { value: "no", label: "No", trigger: "end-message" },
+      ],
+    },
     {
       id: "end-message",
-      message: "Thanks! Your data was submitted successfully!",
+      message: "Thank you for asking!",
       end: true,
     },
   ];
