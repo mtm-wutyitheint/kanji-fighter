@@ -33,7 +33,7 @@ class Learn extends React.Component {
     this.search = this.search.bind(this)
   }
   componentDidMount() {
-    axios.get(env.apiEndPoint + '/kanjis', { params: { level: this.kind, _limit: -1 , _sort: 'KanjiNum:ASC' }})
+    axios.get(env.apiEndPoint + '/kanjis', { params: { level: this.kind, _limit: -1  }})
       .then((response) => {
         this.setState({ data: response.data })
         defaultProps.data = response.data;

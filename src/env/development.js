@@ -1,3 +1,3 @@
 export const env = {
-  apiEndPoint: 'https://kanji-strapi.herokuapp.com'
+  apiEndPoint: 'http://localhost:1337'
 }

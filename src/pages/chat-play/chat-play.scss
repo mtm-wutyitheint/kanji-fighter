@@ -1,0 +1,53 @@
+.App {
+    // text-align: center;
+    margin: 0 auto;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    // background-color: #282c34;
+    width: 31%;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    margin-left: 33%;
+
+    .react-chatbot-kit-chat-container{
+        font-size: 16px;
+        justify-content: unset;
+    }
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .iKHPEO {
+    margin-bottom: -60px;
+    vertical-align: center;
+  }
+  .ggvzyB {
+    font-size: 14px !important;
+  }

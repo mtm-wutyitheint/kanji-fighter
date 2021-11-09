@@ -76,7 +76,7 @@ export default function TopNav() {
                   <a href="/content" onClick={() => setLevel('N5')}>N5</a>
                 </div>
               </div>
-              <a className="space-between" href="/comming-soon">Game</a>
+              <a className="space-between" href="/game">Game</a>
               {guest &&
                 <a className="space-between" href="/signup">Sign up</a>
               }
