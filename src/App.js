@@ -4,7 +4,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GuardedRoute from "./guardedRoute";
 import Content from "./pages/content";
 import Learn from "./pages/learn";
@@ -22,6 +22,7 @@ import ChatPlay from "./pages/chat-play/chat-play";
 import CardPlay from "./pages/card-play/card-play";
 
 function App() {
+  
   const LoginContainer = () => (
     <div className="container">
       <Route path="/login" component={Login} />
@@ -32,10 +33,15 @@ function App() {
     </div>
   );
 
+  const [isshow, showNavbar] = useState(false);
+  useEffect(() => {
+    showNavbar(sessionStorage.getItem('game'));
+  }, [isshow]);
+
   const DefaultContainer = () => (
     <div>
       <div className="container">
-        {!localStorage.getItem("game") && <TopNav />}
+        {sessionStorage.getItem('game') === 'false' && <TopNav />}
         <GuardedRoute path="/game" component={Home} />
         <GuardedRoute path="/content" component={Content} />
         <GuardedRoute path="/top" component={Top} />

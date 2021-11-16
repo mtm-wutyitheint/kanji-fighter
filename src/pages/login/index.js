@@ -25,6 +25,7 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.singup = this.singup.bind(this);
     this.loginInAsGuest = this.loginInAsGuest.bind(this);
+    sessionStorage.setItem('game', false);
   }
   singup(event) {
     this.setState({ open: true, pending: true });
@@ -73,6 +74,7 @@ class Login extends Component {
   loginInAsGuest() {
     this.setState({ success: true });
     sessionStorage.setItem("loginUser", JSON.stringify({ id: "guest" }));
+    sessionStorage.setItem('game', false);
   }
   render() {
     console.log (this.state.notFound)

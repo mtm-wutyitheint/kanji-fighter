@@ -2,6 +2,7 @@
   "name": "words-fighter",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://docs.google.com",
   "dependencies": {
     "@material-ui/core": "^4.12.1",
     "@material-ui/icons": "^4.11.2",
@@ -9,6 +10,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "http-proxy-middleware": "^2.0.1",
     "lodash": "^4.17.21",
     "qs": "^6.10.1",
     "react": "^17.0.2",
@@ -20,7 +22,8 @@
     "react-simple-chatbot": "^0.6.1",
     "sass": "^1.35.2",
     "styled-components": "^5.3.1",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "xlsx": "^0.17.3"
   },
   "scripts": {
     "start": "react-scripts start",

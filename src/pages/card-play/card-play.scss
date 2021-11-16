@@ -1,6 +1,6 @@
-@font-face{
+@font-face {
   font-family: "Noto Sans Japanese";
-  src:url('../../font/NotoSansJP-Regular.otf');
+  src: url("../../font/NotoSansJP-Regular.otf");
 }
 
 .bold {
@@ -14,7 +14,6 @@
   width: 100%;
   min-height: 100vh;
   background: repeat-y center url(../../img/bg-game.png);
-  
 
   .bg_behind {
     position: absolute;
@@ -31,7 +30,7 @@
     h3 {
       margin-top: 40px;
     }
-     div {
+    div {
       font-size: 15px;
       width: 500px;
       text-align: center;
@@ -65,7 +64,6 @@
   .hiraBlock {
     display: inline-block;
     width: 48%;
-    //margin-right: 30px;
     h3 {
       margin: 10px 50px;
       color: black;
@@ -88,17 +86,18 @@
     align-items: stretch;
     gap: 1rem;
     margin: 0 auto;
-    // width: 360px;
     height: 250px;
     perspective: 100%;
     max-width: 500px;
   }
   .home-box {
-    width: 10%;
     position: absolute;
-    bottom: 4%;
+    bottom: 7%;
     left: 5%;
     cursor: pointer;
+    img {
+      width: 10%;
+    }
     p {
       padding: 0;
       margin: 0;
@@ -112,7 +111,6 @@
   }
 
   .chatCon .chat-box {
-    /* display: none; */
     width: 100%;
     height: 500px;
     border-radius: 25px;
@@ -130,17 +128,31 @@
 
   .chatCon .pop {
     width: 70%;
-    height: 25%;
     float: right;
-    cursor: pointer;
+    margin-top: 10px;
   }
 
-  .chatCon .pop p {
+  .chatCon .pop {
     text-align: right;
-  }
+    vertical-align: middle;
+    width: 50%;
 
-  .chatCon .pop img {
-    border-radius: 50%;
-    width: 25%;
+    .info {
+      background-color: rgb(255, 149, 206);
+      padding: 5px;
+      border-radius: 5px;
+      margin: 0;
+      margin: 0;
+      text-align: center;
+    }
+    .img-wrap {
+      margin: 0;
+      padding: 0;
+    }
+    img {
+      width: 30%;
+      cursor: pointer;
+      margin-bottom: -7px;
+    }
   }
 }

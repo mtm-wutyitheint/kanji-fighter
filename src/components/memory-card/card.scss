@@ -22,27 +22,25 @@
   }
   
   .card-face {
-    backface-visibility: hidden;
+    background-color: #CBF4EB;
     position: absolute;
     width: 100%;
     height: 100%;
     &.card-back-face {
-      transform: rotateY(180deg);
       vertical-align: middle;
       h4{
         font-weight: 400;
-        // margin: 12px 0;
       }
     }
   }
 
   &.is-flipped {
-    background-color: #CBF4EB;
-    transform: rotateY(180deg);
+    background-color: #eeeeee;
+    opacity: 0.3;
+    box-shadow: 1px 1px 2px 2px rgb(231, 21, 21);
   }
 
   &.is-inactive {
-    // visibility: hidden;
     opacity: 0;
   }
 }
