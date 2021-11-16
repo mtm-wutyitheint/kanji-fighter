@@ -2,8 +2,14 @@ import logo from "../../img/top_page_logo.png";
 import topText from "../../img/top_page_text.png";
 import "./top.scss";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 function Top() {
+
+  useEffect(() => {
+    sessionStorage.setItem('game', false);
+  });
+
   function setLevel(level) {
     localStorage.setItem('level', level );
   }

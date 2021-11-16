@@ -14,8 +14,8 @@ import MemoryCard from "../../components/memory-card/card";
 import "./card-play.scss";
 import { env } from "../../env/development";
 import ChatPlay from "../chat-play/chat-play";
-import chatIcon from "../../img/chat-icon.png";
-import homeIcon from "../../img/home-icon.png";
+import chatIcon from "../../img/chat.png";
+import homeIcon from "../../img/home01.png";
 import { Link } from "react-router-dom";
 
 function shuffleCards(array) {
@@ -49,21 +49,19 @@ export default function CardPlay() {
   const [moves, setMoves] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [bestScore, setBestScore] = useState(
-    JSON.parse(localStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
+    JSON.parse(sessionStorage.getItem("bestScore")) || Number.POSITIVE_INFINITY
   );
   const timeout = useRef(null);
 
   const getMemoryList = () => {
-    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
-    let jwt = loginUser && loginUser.jwt ? loginUser.jwt : "";
-    const headers = { Authorization: `Bearer ${jwt}` };
+    const params = {
+      kanji_ne: "",
+    };
     axios
-      .get(`${env.apiEndPoint}/lone-twals`)
+      .get(`${env.apiEndPoint}/words-collections`, { params })
       .then((res) => {
-        console.log(res.data);
         const sliceArray = res.data.slice(0, 24);
         let list = randomList(_.cloneDeep(sliceArray));
-        console.log(list);
         setHira(list);
         let shuffleData = shuffleCards(_.cloneDeep(list));
         setMemoryList(shuffleData);
@@ -86,7 +84,7 @@ export default function CardPlay() {
     setShowModal(true);
     const highScore = Math.min(moves, bestScore);
     setBestScore(highScore);
-    localStorage.setItem("bestScore", highScore);
+    sessionStorage.setItem("bestScore", highScore);
   };
 
   const remove = (index) => {
@@ -161,6 +159,7 @@ export default function CardPlay() {
 
   let hide = {
     opacity: "0.5",
+    "pointer-events": "none",
   };
   let show = {
     opacity: "1",
@@ -172,12 +171,11 @@ export default function CardPlay() {
   };
 
   const bactToHome = () => {
-    localStorage.removeItem("game");
+    sessionStorage.setItem("game", false);
   };
 
   return (
     <div className="MemoryCardBlock">
-      {/* <img src={bgImg} alt="" className="bg_behind" /> */}
       <header>
         <h3>フリップカードゲームをプレイする</h3>
         <div>結果的に同じ内容の2枚のカードを選択してそれらを消滅させます。</div>
@@ -230,7 +228,7 @@ export default function CardPlay() {
           <div className="moves">
             <span className="bold">Moves:</span> {moves}
           </div>
-          {localStorage.getItem("bestScore") && (
+          {sessionStorage.getItem("bestScore") && (
             <div className="high-score">
               <span className="bold">Best Score:</span> {bestScore}
             </div>
@@ -238,7 +236,12 @@ export default function CardPlay() {
         </div>
         <br />
         <div className="restart">
-          <Button onClick={handleRestart} color="primary" variant="contained">
+          <Button
+            onClick={handleRestart}
+            style={chatopen ? hide : show}
+            color="primary"
+            variant="contained"
+          >
             Restart
           </Button>
         </div>
@@ -273,23 +276,25 @@ export default function CardPlay() {
           </DialogActions>
         </Dialog>
       </div>
-      <div class="home-box">
+      <div className="home-box">
         <Link to="/content">
           <img src={homeIcon} onClick={bactToHome} alt="" />
         </Link>
-
         <p>Go to home</p>
       </div>
-      <div class="chatCon">
-        <div class="footer">{chatopen && <ChatPlay memoryList = {memoryList}></ChatPlay>}</div>
-
-        <div class="pop">
-          <p>
+      <div className="chatCon">
+        <div className="footer">
+          {chatopen && <ChatPlay memoryList={memoryList}></ChatPlay>}
+        </div>
+        <div className="pop">
+          <p className="img-wrap">
             <img onClick={toggle} src={chatIcon} alt="" />
           </p>
+          {!chatopen && (
+            <p className="info">You can ask me if you want to know something</p>
+          )}
         </div>
       </div>
     </div>
   );
 }
-

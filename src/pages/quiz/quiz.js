@@ -57,7 +57,7 @@ class Quiz extends React.Component {
   }
 
   componentDidMount() {
-    
+    sessionStorage.setItem('game', false);
     const level = localStorage.getItem("level");
     const loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
     if (loginUser && loginUser.id === "guest") {

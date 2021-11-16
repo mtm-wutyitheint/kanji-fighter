@@ -1,7 +1,12 @@
-import "./content.scss"
+import "./content.scss";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 function Content() {
+  useEffect(() => {
+    sessionStorage.setItem("game", false);
+  });
+
   return (
     <div className="content">
       <div className="content-logo clearFix">
@@ -13,9 +18,11 @@ function Content() {
       <div className="content-section">
         <div className="main-section">
           <div className="section">
-            <Link to={{
-              pathname: "/learn",
-            }}>
+            <Link
+              to={{
+                pathname: "/learn",
+              }}
+            >
               <div className="link">
                 <p>Learn</p>
               </div>
@@ -28,17 +35,10 @@ function Content() {
               </div>
             </Link>
           </div>
-          <div className="section">
-            <Link to="/game">
-              <div className="link">
-                <p>Game</p>
-              </div>
-            </Link>
-          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Content;
