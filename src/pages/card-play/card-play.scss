@@ -2,7 +2,12 @@
   font-family: "Noto Sans Japanese";
   src: url("../../font/NotoSansJP-Regular.otf");
 }
-
+:root {
+  --drop-height: 30px;
+  --logo-size: 48px;
+  --offset: 50px;
+  --shadow-height: 8px;
+}
 .bold {
   font-weight: 600;
   text-transform: uppercase;
@@ -149,10 +154,45 @@
       margin: 0;
       padding: 0;
     }
-    img {
-      width: 30%;
+    .logo {
+      width: 20%;
       cursor: pointer;
-      margin-bottom: -7px;
+      margin-bottom: 30px;
+      animation: shake-animation 3s ease infinite;
+      transform-origin: 50% 50%;
+    }
+
+    .shadow {
+      width: var(--logo-size);
+      height: var(--shadow-height);
+      background-color: teal;
+      position: absolute;
+      top: calc(
+        var(--offset) + var(--drop-height) + var(--logo-size) - 1.5 *
+          var(--shadow-height)
+      );
+      left: calc(50% - var(--logo-size) / 2);
+    }
+
+    @keyframes bounce {
+      from {
+        transform: translateY(0) scale(0.8);
+      }
+      to {
+        transform: translateY(var(--drop-height)) scale(0.9, 0.7);
+      }
+    }
+
+    @keyframes shake-animation {
+      0% { transform: translate(0, 0); }
+      1.78571% { transform: translate(5px, 0); }
+      3.57143% { transform: translate(0, 0); }
+      5.35714% { transform: translate(5px, 0); }
+      7.14286% { transform: translate(0, 0); }
+      8.92857% { transform: translate(5px, 0); }
+      10.71429% { transform: translate(0, 0); }
+      100% { transform: translate(0, 0);}
     }
   }
+
 }

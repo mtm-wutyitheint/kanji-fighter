@@ -14,15 +14,19 @@
   cursor: pointer;
   text-align: center;
   font-family: "Noto Sans Japanese";
+  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url('../../img/15.png');
+    // opacity: 0.5;
+    background-size: cover;
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
   .card-face {
-    background-color: #CBF4EB;
+    // background-color: #CBF4EB;
+    
+    
     position: absolute;
     width: 100%;
     height: 100%;
@@ -30,6 +34,7 @@
       vertical-align: middle;
       h4{
         font-weight: 400;
+        color: black;
       }
     }
   }
@@ -39,7 +44,6 @@
     opacity: 0.3;
     box-shadow: 1px 1px 2px 2px rgb(231, 21, 21);
   }
-
   &.is-inactive {
     opacity: 0;
   }

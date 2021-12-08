@@ -14,7 +14,7 @@ import MemoryCard from "../../components/memory-card/card";
 import "./card-play.scss";
 import { env } from "../../env/development";
 import ChatPlay from "../chat-play/chat-play";
-import chatIcon from "../../img/chat.png";
+import chatIcon from "../../img/bot_face.png";
 import homeIcon from "../../img/home01.png";
 import { Link } from "react-router-dom";
 
@@ -37,7 +37,9 @@ function randomList(array) {
     const data = array.splice(index, 1);
     list = [...list, data[0]];
   }
-  return list;
+  const sliceArray = list.slice(0, 24);
+  console.log(sliceArray)
+  return sliceArray;
 }
 
 export default function CardPlay() {
@@ -54,16 +56,24 @@ export default function CardPlay() {
   const timeout = useRef(null);
 
   const getMemoryList = () => {
+    
     const params = {
       kanji_ne: "",
     };
     axios
       .get(`${env.apiEndPoint}/words-collections`, { params })
       .then((res) => {
-        const sliceArray = res.data.slice(0, 24);
-        let list = randomList(_.cloneDeep(sliceArray));
-        setHira(list);
-        let shuffleData = shuffleCards(_.cloneDeep(list));
+        let list = [];
+        for (let i = 0; i < res.data.length; i++) {
+          const index = Math.floor(Math.random() * res.data.length);
+          const data = res.data.splice(index, 1);
+          list = [...list, data[0]];
+        };
+        const sliceArray = list.slice(0, 12);
+        let listData = _.cloneDeep(sliceArray);
+        console.log(list)
+        setHira(listData);
+        let shuffleData = shuffleCards(_.cloneDeep(listData));
         setMemoryList(shuffleData);
       })
       .catch((err) => console.error(err));
@@ -154,7 +164,8 @@ export default function CardPlay() {
     setMoves(0);
     setShouldDisableAllCards(false);
     // set a shuffled deck of cards
-    setMemoryList(shuffleCards(memoryList));
+    getMemoryList();
+    // setMemoryList(shuffleCards(memoryList));
   };
 
   let hide = {
@@ -288,11 +299,11 @@ export default function CardPlay() {
         </div>
         <div className="pop">
           <p className="img-wrap">
-            <img onClick={toggle} src={chatIcon} alt="" />
+            <img className="logo" onClick={toggle} src={chatIcon} alt="" />
           </p>
-          {!chatopen && (
+          {/* {!chatopen && (
             <p className="info">You can ask me if you want to know something</p>
-          )}
+          )} */}
         </div>
       </div>
     </div>

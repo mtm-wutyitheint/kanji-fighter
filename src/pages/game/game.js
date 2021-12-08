@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import mountainBehindImg from "../../img/back-img.png";
+import playcat from "../../img/play-card.png";
 import { Link } from "react-router-dom";
 import "./game.scss";
 
@@ -8,6 +9,10 @@ export default function Home() {
     sessionStorage.setItem("game", true);
   }, []);
 
+  const bactToHome = () => {
+    sessionStorage.setItem("game", false);
+  };
+  
   return (
     <>
       <div className="images">
@@ -16,6 +21,9 @@ export default function Home() {
         <h2 className="text">Words Fighter</h2>
         <Link to="/card-play" className="btn">
           PLAY NOW
+        </Link>
+        <Link to="/content">
+          <img src={playcat} alt="" onClick={bactToHome} className="play_cat" />
         </Link>
       </div>
     </>
